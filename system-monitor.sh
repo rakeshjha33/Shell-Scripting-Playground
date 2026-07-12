@@ -1,0 +1,44 @@
+#!/bin/bash 
+
+# Defining  a cleanup function to handle when the user exits (Ctrl+C)
+cleanup() {
+    clear
+    echo "Monitoring stopped."
+    exit 0
+}
+
+# Trap SIGINT (Ctrl+C) to run the cleanup function gracefully
+trap 'cleanup' SIGINT
+
+# Infinite loop to keep the dashboard updating live
+while true; do
+    # Clear the screen at the start of every cycle so data stays in one place
+    clear
+
+    echo "================================================================="
+    echo "                   SYSTEM RESOURCE MONITOR                       "
+    echo "================================================================="
+
+    # 1. CPU Count
+    echo -e "\n[+] No. of CPUs:"
+    nproc
+
+    echo "-----------------------------------------------------------------"
+
+    # 2. System Disk Space Usage
+    echo -e "\n[+] System Disk Space Usage:"
+    df -h /
+
+    echo "-----------------------------------------------------------------"
+
+    # 3. System RAM Usage
+    echo -e "\n[+] Live System RAM Usage:"
+    free -h
+
+    echo "================================================================="
+    echo "version:1 by Rakesh Jha"
+    echo "Press [Ctrl+C] to exit."
+
+    # Pause for 3 seconds before refreshing the data
+    sleep 3
+done
