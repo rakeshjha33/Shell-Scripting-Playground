@@ -1,0 +1,4 @@
+
+1.) ls 
+
+    This command is used to display all the files and folders of present working    directory
